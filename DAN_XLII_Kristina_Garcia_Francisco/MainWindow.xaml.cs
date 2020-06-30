@@ -1,4 +1,4 @@
-﻿using DAN_XLII_Kristina_Garcia_Francisco.Model;
+﻿using DAN_XLII_Kristina_Garcia_Francisco.ViewModel;
 using System.Windows;
 
 namespace DAN_XLII_Kristina_Garcia_Francisco
@@ -11,7 +11,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
         public MainWindow()
         {
             InitializeComponent();
-
+            this.DataContext = new MainWindowViewModel(this);
         }
     }
 }

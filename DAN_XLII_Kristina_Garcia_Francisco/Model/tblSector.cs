@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DAN_XLII_Kristina_Garcia_Francisco.Model
 {
-    class tblSector
+    public class tblSector
     {
         public tblSector()
         {

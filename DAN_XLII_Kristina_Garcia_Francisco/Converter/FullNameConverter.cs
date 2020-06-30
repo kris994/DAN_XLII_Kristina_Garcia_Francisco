@@ -1,0 +1,32 @@
+﻿using System;
+using System.Globalization;
+using System.Windows.Data;
+
+namespace DAN_XLII_Kristina_Garcia_Francisco.Converter
+{
+    class FullNameConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Service service = new Service();
+            if (value != null)
+            {
+                for (int i = 0; i < service.GetAllUsers().Count; i++)
+                {
+                    if (service.GetAllUsers()[i].UserID == (int)value)
+                    {
+                        return service.GetAllUsers()[i].FirstName + " " + service.GetAllUsers()[i].LastName;
+                    }
+                }
+            }
+
+
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

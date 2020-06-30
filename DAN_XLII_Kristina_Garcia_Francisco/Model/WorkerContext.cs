@@ -2,7 +2,7 @@
 
 namespace DAN_XLII_Kristina_Garcia_Francisco.Model
 {
-    class WorkerContext : DbContext
+    public class WorkerContext : DbContext
     {
         public WorkerContext() : base("name=WorkerDB")
         {

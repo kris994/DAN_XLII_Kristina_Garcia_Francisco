@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DAN_XLII_Kristina_Garcia_Francisco.Model
 {
-    class tblUser
+    public class tblUser
     {
         [Key]
         public int UserID { get; set; }
@@ -24,5 +24,17 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Model
         public virtual tblUser Manager { get; set; }
 
         public ICollection<tblUser> Menagers { get; private set; }
+
+
+        /// <summary>
+        /// Returns full location name
+        /// </summary>
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName}, {LastName}";
+            }
+        }
     }
 }
