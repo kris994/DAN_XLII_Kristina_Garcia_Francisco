@@ -56,8 +56,13 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="6"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="27" Grid.ColumnSpan="4">*Mouse-over to see the validation error message.</TextBlock>
         <Label Grid.Column="1" Grid.Row="1" Name="lblFirstName" Content="First Name:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="3" Name="lblLastName" Content="Last Name:" Padding="0" HorizontalAlignment="Right"/>
         <Label Grid.Column="1" Grid.Row="5" Name="lblJMBG" Content="JMBG:" Padding="0" HorizontalAlignment="Right"/>

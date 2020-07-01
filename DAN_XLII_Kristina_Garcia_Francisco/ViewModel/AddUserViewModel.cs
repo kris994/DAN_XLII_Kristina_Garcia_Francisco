@@ -199,7 +199,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             {
                 if (save == null)
                 {
-                    save = new RelayCommand(param => SaveExecute(), param => CanSaveExecute());
+                    save = new RelayCommand(param => SaveExecute(), param => this.CanSaveExecute);
                 }
                 return save;
             }
@@ -227,9 +227,12 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
         /// Can only execute the field are filled up
         /// </summary>
         /// <returns>true if possible</returns>
-        private bool CanSaveExecute()
+        private bool CanSaveExecute
         {
-            return true;
+            get
+            {
+                return User.IsValid;
+            }
         }
 
         /// <summary>

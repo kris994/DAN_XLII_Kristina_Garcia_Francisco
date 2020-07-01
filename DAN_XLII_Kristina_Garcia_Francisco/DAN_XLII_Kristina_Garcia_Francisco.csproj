@@ -70,6 +70,7 @@
     <Compile Include="Converter\LocationConverter.cs" />
     <Compile Include="Converter\SectorConverter.cs" />
     <Compile Include="Helper\ReadWriteFile.cs" />
+    <Compile Include="Helper\Validation.cs" />
     <Compile Include="InputCalculator.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
