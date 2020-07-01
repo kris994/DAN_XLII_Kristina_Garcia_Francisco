@@ -73,7 +73,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
         /// <summary>
         /// Gets all information about locations from the database
         /// </summary>
-        /// <returns>a list of found locations/returns>
+        /// <returns>a list of found locations</returns>
         public List<tblLocation> GetAllLocations()
         {
             ReadWriteFile rwf = new ReadWriteFile();
@@ -104,7 +104,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
         /// <summary>
         /// Gets all information about sectors from the database
         /// </summary>
-        /// <returns>a list of found sectors/returns>
+        /// <returns>a list of found sectors</returns>
         public List<tblSector> GetAllSectors()
         {
             try
@@ -156,7 +156,8 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
         /// <summary>
         /// Edits a new user depending if the uderID already exists
         /// </summary>
-        /// <param name="user">the user that is bsing added</param>
+        /// <param name="user">the user that is being added</param>
+        /// <param name="sector">the sector that is being added</param>
         /// <returns>a new user</returns>
         public tblUser AddUser(tblUser user, tblSector sector)
         {
@@ -207,7 +208,6 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
                         usersToEdit.UserID = user.UserID;
 
                         context.SaveChanges();
-
                         return user;
                     }
                 }
@@ -222,7 +222,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
         /// <summary>
         /// Deletes user if the uderID exists
         /// </summary>
-        /// <param name="user">the user that is being deleted</param>
+        /// <param name="userID">the user that is being deleted</param>
         public void DeleteUser(int userID)
         {
             List<tblUser> tblUsers = GetAllUsers();

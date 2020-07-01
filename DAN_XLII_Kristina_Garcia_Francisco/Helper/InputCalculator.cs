@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace DAN_XLII_Kristina_Garcia_Francisco
+namespace DAN_XLII_Kristina_Garcia_Francisco.Helper
 {
     /// <summary>
     /// Converts the input values to another needed in the models

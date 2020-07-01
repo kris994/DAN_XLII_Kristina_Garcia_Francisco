@@ -1,11 +1,13 @@
 ﻿using DAN_XLII_Kristina_Garcia_Francisco.Commands;
+using DAN_XLII_Kristina_Garcia_Francisco.Helper;
 using DAN_XLII_Kristina_Garcia_Francisco.Model;
 using DAN_XLII_Kristina_Garcia_Francisco.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,6 +17,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
     {
         MainWindow main;
         Service service = new Service();
+        private readonly BackgroundWorker bgWorker = new BackgroundWorker();
 
         #region Constructor
         /// <summary>
@@ -26,6 +29,8 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             main = mainOpen;
             UserList = service.GetAllUsers().ToList();
             service.GetAllLocations().ToList();
+
+            bgWorker.DoWork += WorkerOnDoWorkDelete;
         }
         #endregion
 
@@ -115,6 +120,12 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
                 {
                     if (User != null)
                     {
+                        if (!bgWorker.IsBusy)
+                        {
+                            // This method will start the execution asynchronously in the background
+                            bgWorker.RunWorkerAsync();
+                        }
+
                         int userID = User.UserID;
                         service.DeleteUser(userID);
                         UserList = service.GetAllUsers().ToList();
@@ -248,5 +259,18 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             return true;
         }
         #endregion
+
+        /// <summary>
+        /// Writes the message to the log file.
+        /// </summary>
+        /// <param name="sender">object sender</param>
+        /// <param name="e">DoWorkEventArgs e</param>
+        public void WorkerOnDoWorkDelete(object sender, DoWorkEventArgs e)
+        {
+            LogMessage log = new LogMessage();
+            string message = log.Message("Deleted", User.FirstName, User.LastName);
+
+            log.LogFile(message);
+        }
     }
 }

@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace DAN_XLII_Kristina_Garcia_Francisco.Commands
 {
+    /// <summary>
+    /// RelayCommand class
+    /// </summary>
     public class RelayCommand : ICommand
     {
         #region Fields readonly
@@ -11,11 +14,20 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Commands
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="execute">action that is being executed</param>
         public RelayCommand(Action<object> execute) : this(execute, null)
         {
 
         }
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="execute">action that is being executed</param>
+        /// <param name="canExecute">checks if it can execute the action</param>
         public RelayCommand(Action<object> execute, Predicate<object> canExecute)
         {
             if (execute == null)
@@ -28,17 +40,29 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Commands
         #endregion
 
         #region ICommand Members
+        /// <summary>
+        /// Checks if it can execute the action
+        /// </summary>
+        /// <param name="parameter">parameter that is being exectuted</param>
+        /// <returns></returns>
         public bool CanExecute(object parameter)
         {
             return _canExecute == null ? true : _canExecute(parameter);
         }
 
+        /// <summary>
+        /// If the option to execute changed
+        /// </summary>
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
+        /// <summary>
+        /// Executes the action
+        /// </summary>
+        /// <param name="parameter">parameter that is being exectuted</param>
         public void Execute(object parameter)
         {
             _execute(parameter);

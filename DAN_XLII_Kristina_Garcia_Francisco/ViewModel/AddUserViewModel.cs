@@ -1,8 +1,10 @@
 ﻿using DAN_XLII_Kristina_Garcia_Francisco.Commands;
+using DAN_XLII_Kristina_Garcia_Francisco.Helper;
 using DAN_XLII_Kristina_Garcia_Francisco.Model;
 using DAN_XLII_Kristina_Garcia_Francisco.View;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -13,7 +15,12 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
     class AddUserViewModel : BaseViewModel
     {
         AddUser addUser;
-        Service service = new Service();
+        Service service = new Service();        
+
+        /// <summary>
+        /// Background worker
+        /// </summary>
+        private readonly BackgroundWorker bgWorker = new BackgroundWorker();
 
         #region Constructor
         /// <summary>
@@ -30,6 +37,8 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             LocationList = service.GetAllLocations().ToList();
             SectorList = service.GetAllSectors().ToList();
             ManagerList = service.GetAllManagers(User.UserID).ToList();
+
+            bgWorker.DoWork += WorkerOnDoWorkUpdate;
         }
 
         /// <summary>
@@ -44,6 +53,15 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             LocationList = service.GetAllLocations().ToList();
             SectorList = service.GetAllSectors().ToList();
             ManagerList = service.GetAllManagers(User.UserID).ToList();
+
+            bgWorker.DoWork += WorkerOnDoWorkCreate;
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        public AddUserViewModel()
+        {
         }
         #endregion
 
@@ -214,6 +232,13 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             {
                 service.AddSector(Sector);
                 service.AddUser(User, Sector);
+             
+                if (!bgWorker.IsBusy)
+                {
+                    // This method will start the execution asynchronously in the background
+                    bgWorker.RunWorkerAsync();
+                }
+
                 isUpdateUser = true;
                 addUser.Close();
             }
@@ -275,5 +300,31 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             return true;
         }
         #endregion
+
+        /// <summary>
+        /// Writes the message to the log file.
+        /// </summary>
+        /// <param name="sender">object sender</param>
+        /// <param name="e">DoWorkEventArgs e</param>
+        public void WorkerOnDoWorkUpdate(object sender, DoWorkEventArgs e)
+        {
+            LogMessage log = new LogMessage();
+            string message = log.Message("Update", User.FirstName, User.LastName);
+
+            log.LogFile(message);
+        }
+
+        /// <summary>
+        /// Writes the message to the log file.
+        /// </summary>
+        /// <param name="sender">object sender</param>
+        /// <param name="e">DoWorkEventArgs e</param>
+        public void WorkerOnDoWorkCreate(object sender, DoWorkEventArgs e)
+        {
+            LogMessage log = new LogMessage();
+            string message = log.Message("Create", User.FirstName, User.LastName);
+
+            log.LogFile(message);
+        }
     }
 }

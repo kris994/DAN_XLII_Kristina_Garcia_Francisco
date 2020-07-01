@@ -85,6 +85,12 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Helper
             }
         }
 
+        /// <summary>
+        /// Input cannot be shorter than expected
+        /// </summary>
+        /// <param name="name">name of the input</param>
+        /// <param name="number">length of the input</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
         public string TooShort(string name, int number)
         {
             if (string.IsNullOrWhiteSpace(name) || name.Length < number)
@@ -95,6 +101,46 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Helper
             {
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Checks if the id card is valid
+        /// </summary>
+        /// <param name="idCard">name of the input</param>
+        /// <param name="id">the users id who has the id card</param>
+        /// <returns>null if the input is correct or string error message if its wrong</returns>
+        public string IDCardChecker(string idCard, int id)
+        {
+            Service service = new Service();
+            List<tblUser> AllUsers = service.GetAllUsers();
+            string currentIDCard = "";
+
+            // Get the current id card
+            for (int i = 0; i < AllUsers.Count; i++)
+            {
+                if (AllUsers[i].UserID == id)
+                {
+                    currentIDCard = AllUsers[i].IDCard;
+                    break;
+                }
+            }
+
+            // Check if thelength of the id card is correct
+            if (string.IsNullOrWhiteSpace(idCard) || idCard.Length != 9)
+            {
+                return "The input length has to be 9 characters.";
+            }
+
+            // Check if the id card already exists, but it is not the current user jmbg
+            for (int i = 0; i < AllUsers.Count; i++)
+            {
+                if (AllUsers[i].IDCard == idCard && currentIDCard != idCard)
+                {
+                    return "This ID Card already exists!";
+                }
+            }
+
+            return null;
         }
     }
 }

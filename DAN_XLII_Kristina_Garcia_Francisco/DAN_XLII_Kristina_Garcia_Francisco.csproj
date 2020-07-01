@@ -27,6 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DAN_XLII_Kristina_Garcia_Francisco.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -69,9 +70,10 @@
     <Compile Include="Converter\GenderConverter.cs" />
     <Compile Include="Converter\LocationConverter.cs" />
     <Compile Include="Converter\SectorConverter.cs" />
+    <Compile Include="Helper\LogMessage.cs" />
     <Compile Include="Helper\ReadWriteFile.cs" />
     <Compile Include="Helper\Validation.cs" />
-    <Compile Include="InputCalculator.cs" />
+    <Compile Include="Helper\InputCalculator.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="ViewModel\AddUserViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -88,7 +90,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="DatabaseContext.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

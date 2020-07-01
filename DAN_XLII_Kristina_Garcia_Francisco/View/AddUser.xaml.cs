@@ -1,4 +1,5 @@
-﻿using DAN_XLII_Kristina_Garcia_Francisco.Model;
+﻿using DAN_XLII_Kristina_Garcia_Francisco.Helper;
+using DAN_XLII_Kristina_Garcia_Francisco.Model;
 using DAN_XLII_Kristina_Garcia_Francisco.ViewModel;
 using System;
 using System.Text.RegularExpressions;
@@ -12,12 +13,20 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.View
     /// </summary>
     public partial class AddUser : Window
     {
+        /// <summary>
+        /// Window constructor for editing users
+        /// </summary>
+        /// <param name="userEdit">user that is bing edited</param>
+        /// <param name="sectorEdit">csector that is being edited</param>
         public AddUser(tblUser userEdit, tblSector sectorEdit)
         {
             InitializeComponent();
             this.DataContext = new AddUserViewModel(this, userEdit, sectorEdit);
         }
 
+        /// <summary>
+        /// Window constructor for creating users
+        /// </summary>
         public AddUser()
         {
             InitializeComponent();
