@@ -17,6 +17,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Model
         /// </summary>
         [Key]
         public int UserID { get; set; }
+
         /// <summary>
         /// User First Name
         /// </summary>

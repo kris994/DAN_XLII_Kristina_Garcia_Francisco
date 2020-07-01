@@ -186,12 +186,12 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
                         context.tblUsers.Add(newUser);
                         context.SaveChanges();
                         user.UserID = newUser.UserID;
+
                         return user;
                     }
                     else
                     {
-                        tblUser usersToEdit = (from ss in context.tblUsers where ss.UserID == user.UserID select ss).First();
-
+                        tblUser usersToEdit = (from ss in context.tblUsers where ss.UserID == user.UserID select ss).First();                      
                         // Get the date of birth
                         user.DateOfBirth = iv.CountDateOfBirth(user.JMBG);
 
@@ -202,7 +202,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
                         usersToEdit.DateOfBirth = user.DateOfBirth;
                         usersToEdit.Gender = user.Gender;
                         usersToEdit.PhoneNumber = user.PhoneNumber;
-                        usersToEdit.SectorID = user.SectorID;
+                        usersToEdit.SectorID = sector.SectorID;
                         usersToEdit.LocationID = user.LocationID;
                         usersToEdit.MenagerID = user.MenagerID;
                         usersToEdit.UserID = user.UserID;
@@ -282,6 +282,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco
                         context.tblSector.Add(newSector);
                         context.SaveChanges();
                         sector.SectorID = newSector.SectorID;
+
                         return sector;
                     }
                     else

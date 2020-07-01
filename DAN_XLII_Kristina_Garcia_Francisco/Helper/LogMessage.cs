@@ -27,6 +27,17 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.Helper
         }
 
         /// <summary>
+        /// Message that will be saved in the log file
+        /// </summary>
+        /// <param name="type">The type of message</param>
+        /// <param name="name">Sector name</param>
+        /// <returns></returns>
+        public string MessageSector(string type, string name)
+        {
+            return type + " sector: " + name;
+        }
+
+        /// <summary>
         /// Save the log message in the file
         /// </summary>
         /// <param name="message">message that will be saved</param>

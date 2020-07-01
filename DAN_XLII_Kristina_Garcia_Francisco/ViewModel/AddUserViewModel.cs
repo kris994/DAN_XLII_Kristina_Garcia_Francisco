@@ -28,11 +28,10 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
         /// </summary>
         /// <param name="addUserOpen">opens the add user window</param>
         /// <param name="userEdit">gets the user info that is being edited</param>
-        /// <param name="sectorEdit">gets the sector info that is being edited</param>
-        public AddUserViewModel(AddUser addUserOpen, tblUser userEdit, tblSector sectorEdit)
+        public AddUserViewModel(AddUser addUserOpen, tblUser userEdit)
         {
-            sector = sectorEdit;
             user = userEdit;
+            sector = new tblSector();
             addUser = addUserOpen;
             LocationList = service.GetAllLocations().ToList();
             SectorList = service.GetAllSectors().ToList();
@@ -232,7 +231,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             {
                 service.AddSector(Sector);
                 service.AddUser(User, Sector);
-             
+                                    
                 if (!bgWorker.IsBusy)
                 {
                     // This method will start the execution asynchronously in the background

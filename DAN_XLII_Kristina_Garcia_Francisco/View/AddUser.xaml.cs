@@ -17,11 +17,10 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.View
         /// Window constructor for editing users
         /// </summary>
         /// <param name="userEdit">user that is bing edited</param>
-        /// <param name="sectorEdit">csector that is being edited</param>
-        public AddUser(tblUser userEdit, tblSector sectorEdit)
+        public AddUser(tblUser userEdit)
         {
             InitializeComponent();
-            this.DataContext = new AddUserViewModel(this, userEdit, sectorEdit);
+            this.DataContext = new AddUserViewModel(this, userEdit);
         }
 
         /// <summary>

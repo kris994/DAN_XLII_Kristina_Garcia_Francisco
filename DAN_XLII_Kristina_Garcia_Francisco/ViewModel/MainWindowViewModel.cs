@@ -3,11 +3,9 @@ using DAN_XLII_Kristina_Garcia_Francisco.Helper;
 using DAN_XLII_Kristina_Garcia_Francisco.Model;
 using DAN_XLII_Kristina_Garcia_Francisco.View;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 
@@ -27,19 +25,20 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
         public MainWindowViewModel(MainWindow mainOpen)
         {
             main = mainOpen;
-            UserList = service.GetAllUsers().ToList();
+            UserList = new ObservableCollection<tblUser>(service.GetAllUsers().ToList());           
             service.GetAllLocations().ToList();
 
             bgWorker.DoWork += WorkerOnDoWorkDelete;
         }
         #endregion
 
+
         #region Property
         /// <summary>
         /// List of all Users
         /// </summary>
-        private List<tblUser> userList;
-        public List<tblUser> UserList
+        private ObservableCollection<tblUser> userList;
+        public ObservableCollection<tblUser> UserList
         {
             get
             {
@@ -48,7 +47,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             set
             {
                 userList = value;
-                OnPropertyChanged("UsersList");
+                OnPropertyChanged("UserList");
             }
         }
 
@@ -114,6 +113,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             // Checks if the user really wants to delete the selected Identification Card info
             var result = MessageBox.Show("Are you sure you want to delete the user?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
+
             if (result == MessageBoxResult.Yes)
             {
                 try
@@ -128,7 +128,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
 
                         int userID = User.UserID;
                         service.DeleteUser(userID);
-                        UserList = service.GetAllUsers().ToList();
+                        UserList.Remove(User);
                     }
                 }
                 catch (Exception ex)
@@ -183,12 +183,12 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
             {
                 if (User != null)
                 {
-                    AddUser addUser = new AddUser(User, Sector);
+                    AddUser addUser = new AddUser(User);
                     addUser.ShowDialog();
 
                     if ((addUser.DataContext as AddUserViewModel).IsUpdateUser == true)
                     {
-                        UserList = service.GetAllUsers().ToList();
+                        UserList = new ObservableCollection<tblUser>(service.GetAllUsers().ToList());
                     }
                 }
             }
@@ -241,7 +241,7 @@ namespace DAN_XLII_Kristina_Garcia_Francisco.ViewModel
                 addUser.ShowDialog();
                 if ((addUser.DataContext as AddUserViewModel).IsUpdateUser == true)
                 {
-                    UserList = service.GetAllUsers().ToList();
+                    UserList = new ObservableCollection<tblUser>(service.GetAllUsers().ToList());
                 }
             }
             catch (Exception ex)
